@@ -2,4 +2,4 @@
 
 ## Project Link
 
-![Covid-Alert](https://github.com/users/wilmararturo/projects/1)
+[Covid-Alert](https://github.com/users/wilmararturo/projects/1)
