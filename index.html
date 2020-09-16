@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css"/>
+    <title>COVID ALERT</title>
+  </head>
+  <body>
+   
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="" />
+        <p>COVID-19<br />ALERT</p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">HOME</a></li>
+          <li><a href="#">GET TESTED</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="stats">
+        <div class="latest-report">
+          <div class="country">
+            <!-- Potential search bar? -->
+            <div class="name">Loading...</div>
+            <div class="change-country">USA</div>
+       
+          </div>
+          <div class="total-cases">
+            <div class="title">Total Cases</div>
+            <div class="value">0</div>
+            <div class="new-value">+0</div>
+          </div>
+          <div class="recovered">
+            <div class="title">Recovered</div>
+            <div class="value">0</div>
+            <div class="new-value">+0</div>
+          </div>
+          <div class="deaths">
+            <div class="title">Deaths</div>
+            <div class="value">0</div>
+            <div class="new-value">+0</div>
+          </div>
+        </div>
+        <!-- potential chart -->
+        <div class="chart">
+          <canvas id="linechart"></canvas>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+      </div>
+    </footer>
+
+    
+  </body>
+</html>
