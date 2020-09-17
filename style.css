@@ -71,6 +71,15 @@ main{
     max-width: 1200px;
     margin: 0 auto;
 }
+/* dropdown menu button */
+.dropdown-menu{
+    max-height: 400px;
+    overflow-y: auto;
+}
+.state {
+    font-size: 2rem;
+}
+
 /* -------- BG IMAGE -------- */
 .stats{
     width: 100%;
