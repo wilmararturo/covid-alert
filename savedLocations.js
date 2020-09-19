@@ -1,6 +1,6 @@
 // variable to hold state input from drop down
 // .searchInput will be replaced by wilmar's class for the drop down
-var stateInput = $(".searchInput").val();
+var stateInput = $("#dropdownMenuButton").val();
 // conditional statement to confirm once user selects a state
 // if a valid state is not selected from the dropdown, console log and prompt user for a valid input
 if (stateInput == "") {
@@ -17,7 +17,7 @@ else {
         // once data is retrieved, run the function to print selected state to the screen
     }).then(function (response) {
         var selectedState = $(".saved-locations").append("<div>").addClass("new-saved-location");
-        selectedState.append("<p>" + response.state + "</li>");
+        selectedState.append("<p>" + response.state + "</p>");
     })
 }
 
