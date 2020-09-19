@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css" />
+
   <title>COVID ALERT</title>
 </head>
 
@@ -45,18 +46,18 @@
         </div>
         <div class="total-cases">
           <div class="title">Total Cases</div>
-          <div class="value">0</div>
-          <div class="new-value">+0</div>
+          <div class="value" id="totalCases">0</div>
+          <div class="new-value" id="newCases">+0</div>
         </div>
         <div class="recovered">
           <div class="title">Recovered</div>
-          <div class="value">0</div>
-          <div class="new-value">+0</div>
+          <div class="value" id="recovery">0</div>
+          <!-- <div class="new-value" id="newRecovery">+0</div> -->
         </div>
         <div class="deaths">
           <div class="title">Deaths</div>
-          <div class="value">0</div>
-          <div class="new-value">+0</div>
+          <div class="value" id="totalDeaths">0</div>
+          <div class="new-value" id="newDeaths">+0</div>
         </div>
       </div>
       <div class="saved-locations" id="saved-locations">
@@ -82,6 +83,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
+  <script src="locationinputAjax.js"></script>
   <script src="states.js"></script>
   <script src="searchButton.js"></script>
   <script src="savedLocations.js"></script>
