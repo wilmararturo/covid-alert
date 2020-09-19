@@ -17,4 +17,5 @@ $(document).on("click", ".dropdown-item", function () {
     var selectedState = $(this)
     console.log(`${selectedState.data().state} - ${selectedState.data().abbr}`);
     stateDisplayEl.text(`${selectedState.data().state}`);
+    getStateData(selectedState.data().abbr);
 })
