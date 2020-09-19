@@ -1,59 +1,21 @@
 
 var dropDownMenuEl = $(".dropdown-menu");
 var stateDisplayEl = $(".state");
-var listofStates = [
-    "Alabama",
-    "Alaska",
-    "Arizona",
-    "Arkansas",
-    "California",
-    "Colorado",
-    "Connecticut",
-    "Delaware",
-    "Florida",
-    "Georgia",
-    "Hawaii",
-    "Idaho",
-    "Illinois",
-    "Indiana",
-    "Iowa",
-    "Kansas",
-    "Kentucky",
-    "Louisiana",
-    "Maine",
-    "Maryland",
-    "Massachusetts",
-    "Michigan",
-    "Minnesota",
-    "Mississippi",
-    "Missouri",
-    "Montana",
-    "Nebraska",
-    "Nevada",
-    "New Hampshire",
-    "New Jersey",
-    "New Mexico",
-    "New York",
-    "North Carolina",
-    "North Dakota",
-    "Ohio",
-    "Oklahoma",
-    "Oregon",
-    "Pennsylvania",
-    "Rhode Island",
-    "South Carolina",
-    "South Dakota",
-    "Tennessee",
-    "Texas",
-    "Utah",
-    "Vermont",
-    "Virginia",
-    "Washington",
-    "West Virginia",
-    "Wisconsin",
-    "Wyoming",
-];
 
+
+for (var state in statesObj) {
+    var stateButtonEl = $("<button>")
+        .attr("class", "dropdown-item")
+        .attr("type", "button")
+        .attr("data-state", statesObj[state].name)
+        .attr("data-abbr", statesObj[state].abbreviation)
+        .text(`${statesObj[state].name}`);
+
+    dropDownMenuEl.append(stateButtonEl.clone());
+}
 $(document).on("click", ".dropdown-item", function () {
-    stateDisplayEl.text(this.text);
+    var selectedState = $(this)
+    console.log(`${selectedState.data().state} - ${selectedState.data().abbr}`);
+    stateDisplayEl.text(`${selectedState.data().state}`);
+    getStateData(selectedState.data().abbr);
 })
