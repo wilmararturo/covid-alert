@@ -15,6 +15,6 @@ for (var state in statesObj) {
 }
 $(document).on("click", ".dropdown-item", function () {
     var selectedState = $(this)
-    console.log(selectedState.data().state);
+    console.log(`${selectedState.data().state} - ${selectedState.data().abbr}`);
     stateDisplayEl.text(`${selectedState.data().state}`);
 })
