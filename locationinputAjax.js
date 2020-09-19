@@ -1,25 +1,25 @@
-$(document).ready(function () {
+// $(document).ready(function () {
 
     // create/listen to click event for state search and saved history
-    $("#dropdownMenuButton").on("change",  getLocation);
+    // $("#dropdownMenuButton").on("click",  getLocation);
 
     // //$(".history").on("li", function () {
     //     // return createSavedLocation();
 
     // });
 
-    function getLocation(event) {
-        console.log(event)
+    function getStateData(state) {
+        console.log(state)
         // create a var and assign the value received back from API
       
-        var event = $("#searchbar").val();
+        // var state = $("#searchbar").val();
 
         // make a request to API openweahtermap
         
         $.ajax({
-            url: 'https://api.covidtracking.com/v1/states/current.json' + searchValue,
+            url: 'https://api.covidtracking.com/v1/states/'+ state + '/current.json',
             method: "GET",
-
+            
         })
 
 
@@ -27,17 +27,19 @@ $(document).ready(function () {
             .then(function (data) {
 
                 //create history link for this search
-                if (history.indexOf(searchValue) === -1) {
-                    history.push(searchValue);
-                    window.localStorage.setItem("history", JSON.stringify(history));
+                // if (history.indexOf(state) === -1) {
+                //     history.push(state);
+                //     window.localStorage.setItem("history", JSON.stringify(history));
 
-                    createSavedLocation(searchValue);
-                }
+                //     createSavedLocation(state);
+                // }
 
                 // clear any old results
-                $(".total-cases").empty();
-                $(".recovered").empty();
-                $(".deaths").empty();
+                $("#totalCases").empty();
+                $("#newCases").empty();
+                $("#recovery").empty();
+                $("#totalDeaths").empty();
+                $("#newDeaths").empty();
 
 
                 // create html content for resutls
@@ -62,18 +64,18 @@ $(document).ready(function () {
     }
 
     // get current histor if any
-    var history = JSON.parse(window.localStorage.getItem("history")) || [];
-    // console.log(history)
-    if (history.length > 0) {
-        getLocation(history[0]);
-    }
+    // var history = JSON.parse(window.localStorage.getItem("history")) || [];
+    // // console.log(history)
+    // if (history.length > 0) {
+    //     getStateData(history[0]);
+    // }
 
     // for (var i = 0; i < history.length; i++) {
     //     // createSavedLocation(history[i]);
     // }
 
 
-});
+// });
 
 
 
