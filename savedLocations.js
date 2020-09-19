@@ -1,25 +1,37 @@
 // variable to hold state input from drop down
-// .searchInput will be replaced by wilmar's class for the drop down
-var stateInput = $("#dropdownMenuButton").val();
+var stateInput = $("#dropdownMenuButton");
+
+stateInput.click(function () {
+
+// call Nuchana's 
+var selectedState = $(".state").val();
 // conditional statement to confirm once user selects a state
 // if a valid state is not selected from the dropdown, console log and prompt user for a valid input
-if (stateInput == "") {
-    prompt("Select a valid state");
-    console.log(stateInput);
-}
-// if a valid state is selected from the dropdown...
-else {
-    // run ajax method to pull data from the api
-    $.ajax({
+
+var covidApiUrl = 'https://api.covidtracking.com/v1/states/' + selectedState + '/current.json';
+
+$.ajax({
         // url will need to be changed based on wilmar's drop down api
         url: covidApiUrl
         method: "GET"
         // once data is retrieved, run the function to print selected state to the screen
     }).then(function (response) {
-        var selectedState = $(".saved-locations").append("<div>").addClass("new-saved-location");
-        selectedState.append("<p>" + response.state + "</p>");
+        var inputState = $(".saved-locations").append("<div>").addClass("new-saved-location");
+        inputState.append("<p>" + response.state + "</p>");
     })
-}
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
