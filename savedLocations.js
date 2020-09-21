@@ -1,25 +1,3 @@
-// // variable to hold state input from drop down
-// var stateInput = $("#dropdownMenuButton");
-
-// stateInput.click(function () {
-
-// // call Nuchana's 
-// var selectedState = $(".state").val();
-// // conditional statement to confirm once user selects a state
-// // if a valid state is not selected from the dropdown, console log and prompt user for a valid input
-
-// var covidApiUrl = 'https://api.covidtracking.com/v1/states/' + selectedState + '/current.json';
-
-// $.ajax({
-//         // url will need to be changed based on wilmar's drop down api
-//         url: covidApiUrl
-//         method: "GET"
-//         // once data is retrieved, run the function to print selected state to the screen
-//     }).then(function (response) {
-//         var inputState = $(".saved-locations").append("<div>").addClass("new-saved-location");
-//         inputState.append("<p>" + response.state + "</p>");
-//     })
-// });
 
 // --------------------------------------------------------
 
@@ -59,19 +37,21 @@ function createSavedButton() {
         method: "GET"
         }).then(function (data) {
 
-        var newSavedLocation = $("<div>").addClass("card").text(history[i]);
+        var newSavedLocation = $("<div>").addClass("card mt-4 ml-4 mr-4 mb-2").text(history[i]);
         $("#saved-locations").append(newSavedLocation);
         
 
         var body = $("<div>").addClass("card-body");
         var title = $("<h3>").addClass("card-title").text(data.state);
         // ADD CHART IMAGE VISUAL FROM SLACK LINK
+        var positive = $("<p>").addClass("card-text").text("Positive: " + data.positive);
         var deaths = $("<p>").addClass("card-text").text("Total Deaths: " + data.death);
-        var hospitalized = $("<p>").addClass("card-text").text("Hospitalized: " + data.hospitalized);
+        var deathIncrease = $("<p>").addClass("card-text").text("Death Increase: " + data.deathIncrease);
         var positiveIncrease = $("<p>").addClass("card-text").text("Positive Increased: " + data.positiveIncrease + "+");
-                
+        var recovered = $("<p>").addClass("card-text").text("Recovered: " + data.recovered);
+            
         newSavedLocation.append(body);
-        body.append(title, deaths, hospitalized, positiveIncrease);
+        body.append(title, deaths, deathIncrease, recovered, positive, positiveIncrease);
         
         })
         }
