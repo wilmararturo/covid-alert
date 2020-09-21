@@ -30,7 +30,7 @@ function savedLocation(state) {
     if (history.length > 0) {
         history.push(state);
         window.localStorage.setItem("history", JSON.stringify(history));
-    } 
+    }
     else {
         history = [state]
         window.localStorage.setItem("history", JSON.stringify(history));
@@ -38,43 +38,43 @@ function savedLocation(state) {
 
     createSavedButton();
     // then create a button on the index page with the state info
-} 
+}
 
 function createSavedButton() {
-    var history = JSON.parse(window.localStorage.getItem("history"))
+    var history = JSON.parse(window.localStorage.getItem("history")) || [];
     $("#saved-locations").empty();
     var resultCount
-        if (history.length < 5){
+    if (history.length < 5) {
         resultCount = history.length;
-        }else{
+    } else {
         resultCount = 5
-        }
+    }
 
     for (var i = 0; i < resultCount; i++) {
-        
+
         var covidApiUrl = 'https://api.covidtracking.com/v1/states/' + history[i] + '/current.json';
 
         $.ajax({
-        url: covidApiUrl,
-        method: "GET"
+            url: covidApiUrl,
+            method: "GET"
         }).then(function (data) {
 
-        var newSavedLocation = $("<div>").addClass("card").text(history[i]);
-        $("#saved-locations").append(newSavedLocation);
-        
+            var newSavedLocation = $("<div>").addClass("card").text(history[i]);
+            $("#saved-locations").append(newSavedLocation);
 
-        var body = $("<div>").addClass("card-body");
-        var title = $("<h3>").addClass("card-title").text(data.state);
-        // ADD CHART IMAGE VISUAL FROM SLACK LINK
-        var deaths = $("<p>").addClass("card-text").text("Total Deaths: " + data.death);
-        var hospitalized = $("<p>").addClass("card-text").text("Hospitalized: " + data.hospitalized);
-        var positiveIncrease = $("<p>").addClass("card-text").text("Positive Increased: " + data.positiveIncrease + "+");
-                
-        newSavedLocation.append(body);
-        body.append(title, deaths, hospitalized, positiveIncrease);
-        
+
+            var body = $("<div>").addClass("card-body");
+            var title = $("<h3>").addClass("card-title").text(data.state);
+            // ADD CHART IMAGE VISUAL FROM SLACK LINK
+            var deaths = $("<p>").addClass("card-text").text("Total Deaths: " + data.death);
+            var hospitalized = $("<p>").addClass("card-text").text("Hospitalized: " + data.hospitalized);
+            var positiveIncrease = $("<p>").addClass("card-text").text("Positive Increased: " + data.positiveIncrease + "+");
+
+            newSavedLocation.append(body);
+            body.append(title, deaths, hospitalized, positiveIncrease);
+
         })
-        }
+    }
 }
 
 
