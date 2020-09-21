@@ -18,5 +18,6 @@ $(document).on("click", ".dropdown-item", function () {
     console.log(`${selectedState.data().state} - ${selectedState.data().abbr}`);
     stateDisplayEl.text(`${selectedState.data().state}`);
     getStateData(selectedState.data().abbr);
+    renderStateChart(selectedState.data().abbr)
     savedLocation(selectedState.data().abbr);
 })
