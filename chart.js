@@ -78,7 +78,13 @@ function renderStateChart(state) {
                     }
                 },
                 tooltips: {
+                    mode: "index",
+                    intersect: false,
                     enabled: true,
+                },
+                hover: {
+                    mode: "nearest",
+                    intersect: false,
                 },
                 scales: {
                     yAxes: [
