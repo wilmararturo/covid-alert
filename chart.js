@@ -7,6 +7,7 @@ function renderStateChart(state) {
     var deathTotal = [];
     var positiveCases = [];
     var axisDate = [];
+    var stateName = (statesObj.find(stateObj => stateObj.abbreviation === state)).name;
 
     //clear existing charts and append chart elements to the chart div
     // chartDivEl.empty();
@@ -32,7 +33,6 @@ function renderStateChart(state) {
                 labels: axisDate,
                 datasets: [{
                     label: "Total Cases",
-
                     data: positiveCases,
                     backgroundColor: "#808080",
                     borderColor: "#808080",
@@ -40,7 +40,6 @@ function renderStateChart(state) {
                     fill: false,
                 }, {
                     label: "Recovered",
-
                     data: recoveredNumber,
                     backgroundColor: "#009688",
                     borderColor: "#009688",
@@ -48,7 +47,6 @@ function renderStateChart(state) {
                     fill: false,
                 }, {
                     label: "Deaths",
-
                     data: deathTotal,
                     backgroundColor: "#f44336",
                     borderColor: "#f44336",
@@ -63,7 +61,7 @@ function renderStateChart(state) {
                 color: ["white"],
                 title: {
                     display: true,
-                    text: `${state} Last 30 Days`,
+                    text: `${stateName} Last 30 Days`,
                 },
                 legend: {
                     display: true,
