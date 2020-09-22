@@ -38,7 +38,7 @@ function createSavedButton() {
         method: "GET"
         }).then(function (data) {
 
-        var newSavedLocation = $("<div>").addClass("card mt-4 ml-4 mr-4 mb-2 bg-light").text(history[i]);
+        var newSavedLocation = $("<div>").addClass("card mt-4 ml-4 mr-4 mb-2 bg-light").addClass("col-sm-4").text(history[i]);
         $("#saved-locations").append(newSavedLocation);
         
 
