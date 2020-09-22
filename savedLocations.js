@@ -5,13 +5,18 @@ function savedLocation(state) {
     // when we click button in search, save location to local storage
     var history = JSON.parse(window.localStorage.getItem("history")) || [];
     console.log(state);
-    if (history.length > 0) {
+    if (history.length < 5) {
         history.push(state);
         window.localStorage.setItem("history", JSON.stringify(history));
     } 
     else {
-        history = [state]
+        // history = [state]
+        // debugger
+        console.log("im in the else");
+        history.splice(0, 1, state);
+        // history.unshift(state);
         window.localStorage.setItem("history", JSON.stringify(history));
+        console.log(history);
     }
 
     createSavedButton();
@@ -22,6 +27,7 @@ function savedLocation(state) {
 function createSavedButton() {
     var history = JSON.parse(window.localStorage.getItem("history"))
     $("#saved-locations").empty();
+    // after the initial 5, we want to prepend to the list
     var resultCount
         if (history.length < 5){
         resultCount = history.length;
@@ -29,7 +35,7 @@ function createSavedButton() {
         resultCount = 5
         }
 
-    for (var i = 0; i < resultCount; i++) {
+    for (var i = 0; i < resultCount ; i++) {
 
         var covidApiUrl = 'https://api.covidtracking.com/v1/states/' + history[i] + '/current.json';
 
@@ -38,11 +44,14 @@ function createSavedButton() {
         method: "GET"
         }).then(function (data) {
 
+        // maybe if statement if history > 5, prepend
         var newSavedLocation = $("<div>").addClass("card mt-4 ml-4 mr-4 mb-2 bg-light").text(history[i]);
         $("#saved-locations").append(newSavedLocation);
         
 
-        var body = $("<div>").addClass("card-body bg-dark float-left");
+        
+        // make separate function?
+        var cardBody = $("<div>").addClass("card-body bg-dark float-left");
         var title = $("<h3>").addClass("card-title text-secondary text-light").text(data.state);
         var positive = $("<p>").addClass("card-text text-warning").text("Positive: " + data.positive);
         var deaths = $("<p>").addClass("card-text text-danger").text("Total Deaths: " + data.death);
@@ -50,8 +59,8 @@ function createSavedButton() {
         var positiveIncrease = $("<p>").addClass("card-text text-warning").text("Positive Increased: " + data.positiveIncrease + "+");
         var recovered = $("<p>").addClass("card-text text-success").text("Recovered: " + data.recovered);
         
-        newSavedLocation.append(body);
-        body.append(title, deaths, deathIncrease, positive, positiveIncrease, recovered);
+        newSavedLocation.append(cardBody);
+        cardBody.append(title, deaths, deathIncrease, positive, positiveIncrease, recovered);
         
         
         
