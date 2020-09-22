@@ -1,52 +1,10 @@
 var chartDivEl = $(".chart")
-var chartEl = $("#linechart")
-    .attr("width", "300")
-    .attr("height", "300");
-var deathChartEl = $("<canvas>").attr("id", "death-chart");
-var caseChartEl = $("<canvas>").attr("id", "case-chart");
-var hospitalChartEl = $("<canvas>").attr("id", "hospital-chart");
-
-//common chart vars -- change one, change them all
-var chartOptions = {
-    responsive: false,
-    legend: {
-        display: true,
-        position: "bottom",
-        labels: {
-
-            boxwidth: 0,
-        }
-    },
-    elements: {
-        line: {
-            borderColor: "#ffffff",
-            borderWidth: 1
-        },
-        point: {
-            radius: 0
-        }
-    },
-    tooltips: {
-        enabled: false
-    },
-    scales: {
-        yAxes: [
-            {
-                display: false
-            }
-        ],
-        xAxes: [
-            {
-                display: false
-            }
-        ]
-
-    }
-}
+var chartEl = $("#linechart");
+var stateChartEl = $("<canvas>").attr("id", "state-chart");
 
 function renderStateChart(state) {
     var queryURL = "https://api.covidtracking.com/v1/states/" + state + "/daily.json"
-    var hospitalizedIncrease = [];
+    var recoveredNumber = [];
     var deathIncrease = [];
     var positiveIncrease = [];
     var axisDate = [];
@@ -54,9 +12,7 @@ function renderStateChart(state) {
     //clear existing charts and append chart elements to the chart div
     chartDivEl.empty();
     chartDivEl.attr("class", "chart row")
-        .append(deathChartEl)
-        .append(hospitalChartEl)
-        .append(caseChartEl);
+        .append(stateChartEl);
     // get 40 days of state data
     $.ajax({
         url: queryURL,
@@ -66,48 +22,92 @@ function renderStateChart(state) {
         for (var i = 0; i < 30; i++) {
             datum = data[i];
             axisDate.push(datum.date);
-            hospitalizedIncrease.push(datum.hospitalizedIncrease);
+            recoveredNumber.push(datum.recovered);
             deathIncrease.push(datum.deathIncrease);
             positiveIncrease.push(datum.positiveIncrease);
         }
-        console.log(axisDate);
-        console.log(deathIncrease);
 
-        var caseChart = new Chart(caseChartEl, {
+        console.log(recoveredNumber);
+        console.log(deathIncrease);
+        console.log(positiveIncrease);
+
+        var caseChart = new Chart(stateChartEl, {
             type: "line",
             data: {
                 labels: axisDate,
                 datasets: [{
                     label: "Positive Case Increase",
+                    yaxisID: "A",
                     data: positiveIncrease,
-                    backgroundColor: "#808080"
-                }]
-            },
-            options: chartOptions
-        });
-        var caseChart = new Chart(hospitalChartEl, {
-            type: "line",
-            data: {
-                labels: axisDate,
-                datasets: [{
-                    label: "Hospitalized Increase",
-                    data: hospitalizedIncrease,
-                    backgroundColor: "#808080"
-                }]
-            },
-            options: chartOptions
-        });
-        var caseChart = new Chart(deathChartEl, {
-            type: "line",
-            data: {
-                labels: axisDate,
-                datasets: [{
+                    backgroundColor: "#808080",
+                    borderColor: "#808080",
+                    fill: false,
+                }, {
+                    label: "Recovered",
+                    yaxisID: "B",
+                    data: recoveredNumber,
+                    backgroundColor: "#009688",
+                    borderColor: "#009688",
+                    fill: false,
+                }, {
                     label: "Death Increase",
+                    yaxisID: "A",
                     data: deathIncrease,
-                    backgroundColor: "#808080"
-                }]
+                    backgroundColor: "#f44336",
+                    borderColor: "#f44336",
+                    fill: false,
+                }
+                ]
             },
-            options: chartOptions
+            options: {
+                responsive: true,
+                legend: {
+                    display: true,
+                    position: "bottom",
+                    labels: {
+
+                        boxwidth: 0,
+                    }
+                },
+                elements: {
+                    line: {
+                        borderColor: "#ffffff",
+                        borderWidth: 1
+                    },
+                    point: {
+                        radius: 0
+                    }
+                },
+                hover: {
+                    mode: "nearest",
+                    intersect: true,
+                },
+                tooltips: {
+                    enabled: true,
+                    intersect: true,
+                },
+                scales: {
+                    yAxes: [
+                        {
+                            id: "A",
+                            location: "left",
+                            display: false
+                        }, {
+
+                            id: "B",
+                            location: "right",
+                            display: false
+
+                        }
+                    ],
+                    xAxes: [
+                        {
+                            display: false
+                        }
+                    ]
+
+                }
+            }
         });
 
 
@@ -120,7 +120,7 @@ function renderStateChart(state) {
         //             label: "Hospitalized Increase",
         //             backgroundColor: "yellow",
         //             borderColor: "yellow",
-        //             data: hospitalizedIncrease,
+        //             data: recoveredNumber,
         //             fill: false,
         //         }, {
         //             label: "New Deaths",
