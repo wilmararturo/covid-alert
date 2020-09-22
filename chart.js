@@ -66,7 +66,7 @@ function renderStateChart(state) {
                     position: "bottom",
                     labels: {
 
-                        boxwidth: 0,
+                        boxwidth: 5,
                     }
                 },
                 elements: {
@@ -83,7 +83,7 @@ function renderStateChart(state) {
                     intersect: true,
                 },
                 tooltips: {
-                    enabled: true,
+                    mode: "index",
                     intersect: true,
                 },
                 scales: {
@@ -91,18 +91,23 @@ function renderStateChart(state) {
                         {
                             id: "A",
                             location: "left",
-                            display: false
+                            display: true
                         }, {
 
                             id: "B",
                             location: "right",
-                            display: false
+                            display: true
 
                         }
                     ],
                     xAxes: [
                         {
-                            display: false
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: "Date"
+                            }
+
                         }
                     ]
 
