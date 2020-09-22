@@ -43,29 +43,33 @@
           <!-- <div class="name">Pick a state...</div> -->
           <div class="state"></div>
 
-        </div>
+      </div>
         <div class="total-cases">
           <div class="title">Total Cases</div>
+          <!-- <p>: <span class="value" id="totalCases"></span></p>
+          <p>: <span class="new-value" id="newCases"></span></p> -->
           <div class="value" id="totalCases">0</div>
           <div class="new-value" id="newCases">+0</div>
         </div>
         <div class="recovered">
           <div class="title">Recovered</div>
           <div class="value" id="recovery">0</div>
-          <!-- <div class="new-value" id="newRecovery">+0</div> -->
+          <div class="new-value" id="newRecovery">+0</div>
         </div>
         <div class="deaths">
           <div class="title">Deaths</div>
           <div class="value" id="totalDeaths">0</div>
           <div class="new-value" id="newDeaths">+0</div>
         </div>
-      </div>
-      <div class="saved-locations" id="saved-locations">
-        <p>Saved locations </p>
-      </div>
+        </div>
+        <div class="saved-locations" id="saved-locations"></div>
+
       <!-- potential chart -->
-      <div class="chart">
-        <canvas id="linechart"></canvas>
+      <div class="chart" position="absolute">
+        <fieldset>
+        <canvas id="myChart" width="50" height="50"></canvas>
+        </fieldset>
+      </div>
       </div>
     </div>
   </main>
@@ -83,6 +87,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
+  <!--chart.js-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
   <script src="locationinputAjax.js"></script>
   <script src="states.js"></script>
   <script src="searchButton.js"></script>
