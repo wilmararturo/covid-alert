@@ -1,19 +1,18 @@
-var chartDivEl = $(".chart")
-var chartEl = $("#linechart");
-var stateChartEl = $("<canvas>").attr("id", "state-chart");
+// var stateChartEl = $("#myChart");
+var ctx = document.getElementById("myChart").getContext("2d");
 
 function renderStateChart(state) {
     var queryURL = "https://api.covidtracking.com/v1/states/" + state + "/daily.json"
     var recoveredNumber = [];
-    var deathIncrease = [];
-    var positiveIncrease = [];
+    var deathTotal = [];
+    var positiveCases = [];
     var axisDate = [];
 
     //clear existing charts and append chart elements to the chart div
-    chartDivEl.empty();
-    chartDivEl.attr("class", "chart row")
-        .append(stateChartEl);
-    // get 40 days of state data
+    // chartDivEl.empty();
+    // chartDivEl.attr("class", "chart row")
+    //     .append(stateChartEl);
+    // get 30 days of state data
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -23,81 +22,75 @@ function renderStateChart(state) {
             datum = data[i];
             axisDate.push(datum.date);
             recoveredNumber.push(datum.recovered);
-            deathIncrease.push(datum.deathIncrease);
-            positiveIncrease.push(datum.positiveIncrease);
+            deathTotal.push(datum.death);
+            positiveCases.push(datum.positive);
         }
 
-        console.log(recoveredNumber);
-        console.log(deathIncrease);
-        console.log(positiveIncrease);
-
-        var caseChart = new Chart(stateChartEl, {
+        var caseChart = new Chart(ctx, {
             type: "line",
             data: {
                 labels: axisDate,
                 datasets: [{
-                    label: "Positive Case Increase",
-                    yaxisID: "A",
-                    data: positiveIncrease,
+                    label: "Total Cases",
+
+                    data: positiveCases,
                     backgroundColor: "#808080",
                     borderColor: "#808080",
+                    borderWidth: 3,
                     fill: false,
                 }, {
                     label: "Recovered",
-                    yaxisID: "B",
+
                     data: recoveredNumber,
                     backgroundColor: "#009688",
                     borderColor: "#009688",
+                    borderWidth: 3,
                     fill: false,
                 }, {
-                    label: "Death Increase",
-                    yaxisID: "A",
-                    data: deathIncrease,
+                    label: "Deaths",
+
+                    data: deathTotal,
                     backgroundColor: "#f44336",
                     borderColor: "#f44336",
+                    borderWidth: 3,
                     fill: false,
                 }
                 ]
             },
             options: {
                 responsive: true,
+                showTooltips: true,
+                color: ["white"],
+                title: {
+                    display: true,
+                    text: `${state} Last 30 Days`,
+                },
                 legend: {
                     display: true,
                     position: "bottom",
-                    labels: {
 
-                        boxwidth: 5,
-                    }
                 },
                 elements: {
                     line: {
-                        borderColor: "#ffffff",
-                        borderWidth: 1
+                        borderColor: "#000000",
+                        borderWidth: 2
                     },
                     point: {
                         radius: 0
                     }
                 },
-                hover: {
-                    mode: "nearest",
-                    intersect: true,
-                },
                 tooltips: {
-                    mode: "index",
-                    intersect: true,
+                    enabled: true,
                 },
                 scales: {
                     yAxes: [
                         {
-                            id: "A",
+
                             location: "left",
-                            display: true
-                        }, {
-
-                            id: "B",
-                            location: "right",
-                            display: true
-
+                            display: true,
+                            ticks: {
+                                beginAtZero: true
+                            }
                         }
                     ],
                     xAxes: [
@@ -117,66 +110,6 @@ function renderStateChart(state) {
 
 
 
-        // var stateChart = new Chart(chartEl, {
-        //     type: 'line',
-        //     data: {
-        //         labels: axisDate,
-        //         datasets: [{
-        //             label: "Hospitalized Increase",
-        //             backgroundColor: "yellow",
-        //             borderColor: "yellow",
-        //             data: recoveredNumber,
-        //             fill: false,
-        //         }, {
-        //             label: "New Deaths",
-        //             backgroundColor: "red",
-        //             borderColor: "red",
-        //             data: deathIncrease,
-        //             fill: false,
-        //         }, {
-        //             label: "New Cases",
-        //             backgroundColor: "green",
-        //             borderColor: "green",
-        //             data: positiveIncrease,
-        //             fill: false,
-        //         }
-
-        //         ]
-        //     },
-        //     options: {
-        //         responsive: false,
-        //         color: ["white"],
-        //         title: {
-        //             display: true,
-        //             text: `${state} Covid Chart`,
-        //         },
-        //         tooltips: {
-        //             mode: "index",
-        //             intersect: false,
-        //         },
-        //         hover: {
-        //             mode: "nearest",
-        //             intersect: true,
-        //         },
-        //         scales: {
-        //             xAxes: [{
-        //                 display: false,
-        //                 scaleLabel: {
-        //                     display: true,
-        //                     labelString: 'Date'
-        //                 }
-        //             }],
-        //             yAxes: [{
-        //                 display: true,
-        //                 scaleLabel: {
-        //                     display: true,
-        //                     labelString: 'Value'
-        //                 }
-        //             }]
-        //         }
-
-        //     }
-        // });
 
 
 
