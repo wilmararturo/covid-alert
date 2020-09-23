@@ -45,7 +45,9 @@ header{
     color: green;
 }
 /* -------- NAV -------- */
-nav
+nav{
+    
+}
 
 nav ul{
     display: flex;

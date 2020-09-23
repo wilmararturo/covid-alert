@@ -14,9 +14,10 @@ function savedLocation(state) {
         // debugger
         console.log("im in the else");
         history.splice(0, 1, state);
+        console.log(history)
         // history.unshift(state);
         window.localStorage.setItem("history", JSON.stringify(history));
-        console.log(history);
+        // console.log(history);
     }
 
     createSavedButton();
@@ -46,7 +47,7 @@ function createSavedButton() {
 
             // maybe if statement if history > 5, prepend
             var newSavedLocation = $("<div>").addClass("card mt-4 ml-4 mr-4 mb-2 bg-light").text(history[i]);
-            $("#saved-locations").append(newSavedLocation);
+            $("#saved-locations").prepend(newSavedLocation);
 
 
 
